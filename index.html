@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitWise - Conversor de Dados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="logo-header">
+                <svg class="bitwise-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background circle -->
+                    <circle cx="50" cy="50" r="48" fill="none" stroke="#990000" stroke-width="2" opacity="0.3"/>
+                    <!-- Bit 1 -->
+                    <rect x="15" y="30" width="15" height="15" fill="#990000" rx="2"/>
+                    <text x="22" y="43" font-size="12" font-weight="bold" fill="#0a0a0a" text-anchor="middle">1</text>
+                    <!-- Bit 0 -->
+                    <rect x="40" y="30" width="15" height="15" fill="none" stroke="#990000" stroke-width="2" rx="2"/>
+                    <text x="47" y="43" font-size="12" font-weight="bold" fill="#990000" text-anchor="middle">0</text>
+                    <!-- Bit 1 -->
+                    <rect x="65" y="30" width="15" height="15" fill="#990000" rx="2"/>
+                    <text x="72" y="43" font-size="12" font-weight="bold" fill="#0a0a0a" text-anchor="middle">1</text>
+                    <!-- Arrow down -->
+                    <path d="M 50 50 L 50 65" stroke="#990000" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <!-- Conversion symbol -->
+                    <circle cx="50" cy="75" r="8" fill="#990000" opacity="0.3"/>
+                    <text x="50" y="78" font-size="10" font-weight="bold" fill="#990000" text-anchor="middle">↔</text>
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#990000"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <h1>BitWise</h1>
+            
+            <div class="form-group">
+                <label for="inputValor">Valor:</label>
+                <input type="number" id="inputValor" placeholder="Digite o valor..." min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="unidadeOrigem">Unidade de Origem:</label>
+                <select id="unidadeOrigem">
+                    <option value="1">Bytes (B)</option>
+                    <option value="1024">Kilobytes (KB)</option>
+                    <option value="1048576">Megabytes (MB)</option>
+                    <option value="1073742824">Gigabytes (GB)</option>
+                    <option value="1099511827776">Terabytes (TB)</option>
+                </select>
+            </div>
+
+            <div id="resultadoArea" class="results"></div>
+        </div>
+    </div>
+    
+    <footer id="footer">By lukasxwz</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
