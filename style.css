@@ -1,17 +1,18 @@
 :root {
-    --primary: #990000;
-    --primary-light: #cc0000;
-    --primary-dark: #660000;
-    --dark: #0a0a0a;
-    --card: #141414;
-    --text: #e0e0e0;
-    --success: #3fb950;
-    --error: #f85149;
-    --warning: #d29922;
-    --border: rgba(153, 0, 0, 0.3);
-    --border-hover: rgba(153, 0, 0, 0.6);
+    --bg: #0a0a0a;
+    --bg-soft: #111;
+    --card: #151515;
+
+    --text: #e5e5e5;
+    --muted: #777;
+
+    --accent: #ff3b3b;
+    --accent-soft: rgba(255, 59, 59, 0.15);
+
+    --border: #1f1f1f;
 }
 
+/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -19,166 +20,165 @@
 }
 
 body {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    background: var(--bg);
     color: var(--text);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif;
+
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
     padding: 20px;
-    position: relative;
-    overflow-x: hidden;
 }
 
+/* NOISE */
 body::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 20% 50%, rgba(153, 0, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(153, 0, 0, 0.05) 0%, transparent 50%);
-    pointer-events: none;
+    inset: 0;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04;
     z-index: -1;
 }
 
-.content {
+/* APP */
+.app {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
 }
 
-.container {
-    background: linear-gradient(135deg, #141414 0%, #1f1f1f 100%);
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(153, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    width: 100%;
-    max-width: 500px;
-    border: 1px solid var(--border);
-    backdrop-filter: blur(10px);
-    position: relative;
-    z-index: 1;
-}
-
-.logo-header {
-    text-align: center;
+/* HEADER */
+.app-header {
     margin-bottom: 20px;
 }
 
-.bitwise-logo {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto;
-    display: block;
-    filter: drop-shadow(0 4px 8px rgba(153, 0, 0, 0.2));
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 36px;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+.logo svg {
+    width: 50px;
+    height: 50px;
+    color: var(--accent);
 }
 
-.form-group {
+.logo h1 {
+    font-size: 1.8rem;
+}
+
+.logo span {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+/* CONVERTER */
+.converter {
+    width: 100%;
+    max-width: 500px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    padding: 30px;
+}
+
+/* FIELD */
+.field {
     margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: var(--primary);
-    font-size: 13px;
+    margin-bottom: 6px;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--muted);
 }
 
-input[type="number"],
+/* INPUT */
+input,
 select {
     width: 100%;
-    padding: 14px 16px;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    background-color: rgba(30, 30, 30, 0.8);
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+
+    background: var(--bg-soft);
     color: var(--text);
-    font-size: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(5px);
+
+    font-size: 0.95rem;
 }
 
-input[type="number"]:hover,
-select:hover {
-    border-color: var(--border-hover);
-}
-
-input[type="number"]:focus,
+input:focus,
 select:focus {
     outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 20px rgba(153, 0, 0, 0.4),
-                inset 0 1px 0 rgba(153, 0, 0, 0.2);
-    background-color: rgba(30, 30, 30, 0.95);
+    border-color: var(--accent);
 }
 
-select {
+/* BUTTON */
+.btn-convert {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+
     cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23990000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 20px;
-    padding-right: 40px;
+    transition: 0.3s;
+
+    margin-top: 10px;
 }
 
+.btn-convert:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+/* RESULTS */
 .results {
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
+.placeholder {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* RESULT BOX */
 .result-box {
-    background: linear-gradient(135deg, rgba(153, 0, 0, 0.1) 0%, rgba(153, 0, 0, 0.05) 100%);
-    border-left: 4px solid var(--primary);
-    border-radius: 12px;
-    padding: 24px;
-    animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-soft);
     border: 1px solid var(--border);
-    backdrop-filter: blur(5px);
+    border-left: 3px solid var(--accent);
+
+    border-radius: 10px;
+    padding: 20px;
+
+    animation: fadeUp 0.4s ease;
 }
 
 .result-box h3 {
-    color: var(--primary);
-    margin-bottom: 18px;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+    margin-bottom: 15px;
+    font-size: 1rem;
 }
 
+/* LIST */
 .conversion-list {
     list-style: none;
 }
 
 .conversion-list li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
-    font-size: 15px;
-    transition: all 0.2s ease;
-}
+    padding: 10px 0;
 
-.conversion-list li:hover {
-    padding-left: 8px;
-    color: var(--primary);
+    border-bottom: 1px solid var(--border);
 }
 
 .conversion-list li:last-child {
@@ -186,48 +186,22 @@ select {
 }
 
 .conversion-list strong {
-    color: var(--primary);
-    font-weight: 700;
-    min-width: 120px;
+    color: var(--accent);
 }
 
-.error {
-    color: var(--error);
-    padding: 14px 16px;
-    background: linear-gradient(135deg, rgba(248, 81, 73, 0.1) 0%, rgba(248, 81, 73, 0.05) 100%);
-    border-radius: 10px;
-    border-left: 4px solid var(--error);
-    border: 1px solid rgba(248, 81, 73, 0.3);
-    margin: 0;
-    font-size: 14px;
-}
-
-.info {
-    color: var(--warning);
-    padding: 14px 16px;
-    background: linear-gradient(135deg, rgba(217, 156, 34, 0.1) 0%, rgba(217, 156, 34, 0.05) 100%);
-    border-radius: 10px;
-    border-left: 4px solid var(--warning);
-    border: 1px solid rgba(217, 156, 34, 0.3);
-    margin: 0;
-    font-size: 14px;
-}
-
-#footer {
+/* FOOTER */
+.footer {
     text-align: center;
     padding: 20px;
-    font-size: 12px;
-    color: rgba(153, 0, 0, 0.6);
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    border-top: 1px solid var(--border);
-    margin-top: auto;
+    font-size: 0.8rem;
+    color: var(--muted);
 }
 
-@keyframes slideIn {
+/* ANIMATION */
+@keyframes fadeUp {
     from {
         opacity: 0;
-        transform: translateY(-15px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
@@ -235,37 +209,9 @@ select {
     }
 }
 
-@keyframes glow {
-    0%, 100% {
-        box-shadow: 0 20px 60px rgba(65, 105, 225, 0.2),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    50% {
-        box-shadow: 0 20px 60px rgba(65, 105, 225, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-}
-
+/* MOBILE */
 @media (max-width: 600px) {
-    .container {
-        padding: 25px;
-        box-shadow: 0 15px 40px rgba(65, 105, 225, 0.15);
-    }
-    
-    h1 {
-        font-size: 26px;
-        margin-bottom: 25px;
-    }
-    
-    .form-group {
-        margin-bottom: 18px;
-    }
-    
-    .conversion-list li {
-        flex-direction: column;
-        gap: 6px;
-        padding: 10px 0;
+    .converter {
+        padding: 20px;
     }
 }
-
-
