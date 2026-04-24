@@ -2,35 +2,74 @@ const inputValor = document.querySelector('#inputValor');
 const unidadeOrigem = document.querySelector('#unidadeOrigem');
 const resultadoArea = document.querySelector('#resultadoArea');
 
-function converter() {
-    const valor = parseFloat(inputValor.value);
-    const multiplicador = parseFloat(unidadeOrigem.value);
-    
-    if (isNaN(valor) || valor < 0) {
-        resultadoArea.innerHTML = '<p class="error">Digite um valor válido (número não-negativo)</p>';
-        return;
-    }
+// ================= CONSTANTES =================
+const UNIDADES = {
+    B: 1,
+    KB: 1024,
+    MB: 1024 ** 2,
+    GB: 1024 ** 3,
+    TB: 1024 ** 4
+};
 
-    if (valor === 0) {
-        resultadoArea.innerHTML = '<p class="info">Digite um valor maior que 0</p>';
-        return;
-    }
+// ================= FORMATADOR =================
+function format(valor) {
+    return valor.toLocaleString('pt-BR', {
+        maximumFractionDigits: 2
+    });
+}
 
-    const bytes = valor * multiplicador;
+// ================= RENDER =================
+function renderResultado(bytes) {
+    const resultados = {
+        B: bytes,
+        KB: bytes / UNIDADES.KB,
+        MB: bytes / UNIDADES.MB,
+        GB: bytes / UNIDADES.GB,
+        TB: bytes / UNIDADES.TB
+    };
 
     resultadoArea.innerHTML = `
         <div class="result-box">
-            <h3>Resultado da Conversão:</h3>
+            <h3>Resultado da conversão</h3>
             <ul class="conversion-list">
-                <li><strong>Bytes:</strong> ${bytes.toFixed(2)} B</li>
-                <li><strong>Kilobytes:</strong> ${(bytes / 1024).toFixed(2)} KB</li>
-                <li><strong>Megabytes:</strong> ${(bytes / 1048576).toFixed(2)} MB</li>
-                <li><strong>Gigabytes:</strong> ${(bytes / 1073742824).toFixed(2)} GB</li>
-                <li><strong>Terabytes:</strong> ${(bytes / 1099511827776).toFixed(2)} TB</li>
+                ${Object.entries(resultados).map(([unidade, valor]) => `
+                    <li>
+                        <strong>${unidade}</strong>
+                        <span>${format(valor)}</span>
+                    </li>
+                `).join('')}
             </ul>
         </div>
     `;
 }
 
+// ================= ERROS =================
+function showError(message, type = 'error') {
+    resultadoArea.innerHTML = `
+        <p class="${type}">${message}</p>
+    `;
+}
+
+// ================= CONVERSÃO =================
+function converter() {
+    const valor = parseFloat(inputValor.value);
+    const multiplicador = parseFloat(unidadeOrigem.value);
+
+    if (isNaN(valor) || valor < 0) {
+        showError('Digite um valor válido (número não negativo)');
+        return;
+    }
+
+    if (valor === 0) {
+        showError('Digite um valor maior que 0', 'info');
+        return;
+    }
+
+    const bytes = valor * multiplicador;
+
+    renderResultado(bytes);
+}
+
+// ================= EVENTOS =================
 inputValor.addEventListener('input', converter);
 unidadeOrigem.addEventListener('change', converter);
